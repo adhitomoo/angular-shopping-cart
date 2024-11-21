@@ -123,7 +123,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     modalRef.componentInstance.total = this.totalPrice
 
     modalRef.afterClosed().subscribe({
-      next: (result) => {
+      next: (result: boolean) => {
         if(result) {
           this.products = this.products.map((product) => {
             product.qty = 0;
@@ -132,10 +132,11 @@ export class AppComponent implements OnInit, AfterViewInit {
             return product;
           })
 
-          this.carts.update((currentItem) => {
-            currentItem.splice(1, currentItem.length);
+          this.carts.update((currentItems) => {
+            currentItems = []
+            this.totalCart = 0;
 
-            return currentItem;
+            return currentItems;
           })
         }
       }
